@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BVG Golf System</title>
+    <script>
+        async function handleLogin() {
+            const email = document.getElementById("email").value.trim();
+            const errorMessage = document.getElementById("error-message");
+            const tournamentSelection = document.getElementById("tournament-selection");
+            const tournamentDropdown = document.getElementById("tournament");
+            
+            errorMessage.innerText = "";
+            tournamentSelection.style.display = "none";
+            tournamentDropdown.innerHTML = "";
+            
+            if (!email) {
+                errorMessage.innerText = "Please enter your email.";
+                return;
+            }
+            
+            // Simulated API request to check email
+            const members = ["user1@example.com", "user2@example.com", "test@bvg.com"];
+            if (!members.includes(email)) {
+                errorMessage.innerText = "This email address does not exist in the BVG Members Database. Please contact a BVG Admin for assistance.";
+                return;
+            }
+            
+            // Simulated API request to fetch tournaments
+            const tournaments = ["Spring Classic", "Summer Invitational"];
+            
+            if (tournaments.length > 1) {
+                tournamentSelection.style.display = "block";
+                tournaments.forEach(tournament => {
+                    let option = document.createElement("option");
+                    option.value = tournament;
+                    option.innerText = tournament;
+                    tournamentDropdown.appendChild(option);
+                });
+            } else {
+                alert("Welcome! Redirecting to the Scorekeeper Setup Page...");
+                window.location.href = "scorekeeper_setup.html";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Login to BVG Golf System</h1>
+    <label for="email">Enter your email:</label>
+    <input type="email" id="email" placeholder="your@email.com">
+    <button onclick="handleLogin()">Login</button>
+    <p id="error-message" style="color: red;"></p>
+    
+    <div id="tournament-selection" style="display: none;">
+        <label for="tournament">Select Tournament:</label>
+        <select id="tournament"></select>
+        <button onclick="window.location.href='scorekeeper_setup.html'">Proceed</button>
+    </div>
+</body>
+</html>
